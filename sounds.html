@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>בחירת צלילים - נדבץ' 40</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{ --wine:#722F37; --cream:#FFF9EE; --ink:#23202B; --teal:#0E7490; --mustard:#E8A33D; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Rubik',Arial,sans-serif;background:var(--cream);color:var(--ink);padding:30px 16px}
+.wrap{max-width:760px;margin:0 auto}
+h1{color:var(--wine);font-size:32px;margin-bottom:6px}
+p{font-size:17px;margin-bottom:20px}
+h2{color:var(--teal);font-size:22px;margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+button{
+  font-family:inherit;font-size:15px;font-weight:700;padding:12px 8px;
+  background:#fff;border:3px solid var(--ink);border-radius:12px;
+  box-shadow:4px 4px 0 var(--ink);cursor:pointer;
+}
+button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+button.current{background:var(--mustard)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>בחירת צלילים</h1>
+<p>לוחצים, מאזינים, ואומרים לי את השם של מה שאהבת לפתיחה ולסיום. הצהובים = מה שמוגדר עכשיו.</p>
+
+<h2>מה שבאתר עכשיו</h2>
+<div class="grid">
+  <button class="current" onclick="p('welcome.ogg')">פתיחה נוכחית (מדלי סטיל)</button>
+  <button class="current" onclick="p('win.ogg')">סיום נוכחי (מדלי סטיל+היט)</button>
+  <button class="current" onclick="p('timeup.ogg')">סוף טיימר נוכחי</button>
+</div>
+
+<h2>מועמדים - תופי פלדה</h2>
+<div class="grid" id="steel"></div>
+
+<h2>מועמדים - אחרים</h2>
+<div class="grid">
+  <button onclick="p('audition/jingles_HIT11.ogg')">HIT11</button>
+  <button onclick="p('audition/jingles_HIT15.ogg')">HIT15</button>
+  <button onclick="p('audition/jingles_SAX03.ogg')">SAX03</button>
+  <button onclick="p('audition/jingles_SAX07.ogg')">SAX07 (הסיום הישן)</button>
+  <button onclick="p('audition/jingles_PIZZI07.ogg')">PIZZI07</button>
+</div>
+
+<script>
+const steel = document.getElementById('steel');
+for(let i=0;i<=16;i++){
+  const n = 'STEEL'+String(i).padStart(2,'0');
+  const b = document.createElement('button');
+  b.textContent = n;
+  b.onclick = ()=>p('audition/jingles_'+n+'.ogg');
+  steel.appendChild(b);
+}
+let cur=null;
+function p(f){ if(cur){cur.pause();} cur = new Audio('assets/sfx/'+f); cur.play(); }
+</script>
+</div>
+</body>
+</html>
